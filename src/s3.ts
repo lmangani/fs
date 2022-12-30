@@ -37,6 +37,10 @@ export class S3FileSystem extends FileSystem {
    */
   constructor() {
     super()
+    if (process.env.AWS_ENDPOINT) AWS.config.update({region: process.env.ENDPOINT});
+    if (process.env.AWS_ACCESS_KEY_ID) AWS.config.update({accessKeyId: process.env.AWS_ACCESS_KEY_ID});
+    if (process.env.AWS_SECRET_ACCESS_KEY) AWS.config.update({secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY}); 
+    AWS.config.update({s3ForcePathStyle: true }); 
     this.s3 = new AWS.S3()
   }
 
